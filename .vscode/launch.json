@@ -1,0 +1,49 @@
+{
+  "version": "0.2.0",
+  "configurations": [{
+    "type": "node",
+    "request": "launch",
+    "name": "App debug",
+    "program": "${workspaceRoot}/bin/busmonitor.ts",
+    "cwd": "${workspaceRoot}",
+    "preLaunchTask": "tsc",
+    "internalConsoleOptions": "openOnSessionStart",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "sourceMaps": true
+  }, {
+    "type": "node",
+    "request": "launch",
+    "name": "Debug file",
+    "program": "${file}",
+    "cwd": "${workspaceRoot}",
+    "preLaunchTask": "tsc",
+    "internalConsoleOptions": "openOnSessionStart",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "args": [
+      "test.knxproj"
+    ],
+    "sourceMaps": true
+  }, {
+    "name": "Test debug",
+    "type": "node",
+    "request": "launch",
+    "program": "${workspaceRoot}/scripts/debug.js",
+    "cwd": "${workspaceRoot}",
+    "preLaunchTask": "tsc",
+    "args": [
+      "${workspaceRoot}", "${file}"
+    ],
+    "env": {
+      "NODE_ENV": "test"
+    },
+    "internalConsoleOptions": "openOnSessionStart",
+    "runtimeArgs": [
+      "--nolazy"
+    ],
+    "sourceMaps": true
+  }]
+}

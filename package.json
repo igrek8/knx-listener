@@ -1,0 +1,60 @@
+{
+  "name": "knx-listener",
+  "license": "MIT",
+  "version": "0.0.2",
+  "main": "index.js",
+  "description": "A thin client that creates a tunnel to knx gateway to listen to telegrams within knx net",
+  "keywords": [
+    "knx", "eibd", "house automation", "smart home"
+  ],
+  "bugs": {
+    "url": "http://github.com/crabicode/knx-listener/issues"
+  },
+  "engines": {
+    "node": ">=6.9.2"
+  },
+  "author": {
+    "name": "Igor Korchagin",
+    "email": "se.meridian@gmail.com",
+    "url": "https://github.com/crabicode"
+  },
+  "homepage": "https://github.com/crabicode/knx-listener",
+  "readme": "README.md",
+  "scripts": {
+    "start": "node bin/busmonitor.js",
+    "busmonitor": "node bin/busmonitor.js",
+    "groupswrite": "node bin/groupswrite.js",
+    "groupsread": "node bin/groupsread.js",
+    "test": "concurrently --raw \"tsc -w > /dev/null\" \"jest --watchAll\""
+  },
+  "devDependencies": {
+    "@types/chalk": "0.4.31",
+    "@types/jest": "^16.0.3",
+    "@types/node": "^6.0.55",
+    "@types/yargs": "6.5.0",
+    "concurrently": "^3.1.0",
+    "jest": "^18.1.0",
+    "ts-helpers": "^1.1.2",
+    "tslint": "^4.2.0",
+    "typescript": "^2.1.4"
+  },
+  "dependencies": {
+    "tslib": "^1.4.0",
+    "chalk": "1.1.3",
+    "yargs": "6.6.0"
+  },
+  "jest": {
+    "bail": true,
+    "testPathIgnorePatterns": [
+      "<rootDir>/__tests__/helpers",
+      "node_modules"
+    ],
+    "testEnvironment": "node",
+    "testPathDirs": [
+      "__tests__"
+    ],
+    "modulePaths": [
+      "<rootDir>"
+    ]
+  }
+}

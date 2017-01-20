@@ -1,0 +1,21 @@
+{
+  "compilerOptions": {
+    "declaration": true,
+    "target": "es2016",
+    "inlineSourceMap": true,
+    "inlineSources": true,
+    "forceConsistentCasingInFileNames": true,
+    "outDir": "dist",
+    "module": "commonjs",
+    "preserveConstEnums": false,
+    "importHelpers": true,
+    "alwaysStrict": true,
+    "declarationDir": "dist",
+    "allowJs": false,
+    "newLine": "LF",
+    "removeComments": true
+  },
+  "include": [
+    "src/*"
+  ]
+}
