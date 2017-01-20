@@ -1,7 +1,7 @@
 {
   "name": "knx-listener",
   "license": "MIT",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "description": "A thin client that creates a tunnel to knx gateway to listen to telegrams within knx net",
