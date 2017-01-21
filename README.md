@@ -23,7 +23,7 @@ node bin/busmonitor -s 192.168.0.100
 ```
 ![](http://i.giphy.com/26xBuNRYG1nGUnj3O.gif)
 
-### Write value `1` to `0/0/1` through `192.168.0.100`
+### Write value **1** to **0/0/1** through **192.168.0.100**
 ```
 Usage bin/groupswrite.js -s <ip address> -g <group address> -d <XX:XX:..>
 
@@ -39,7 +39,7 @@ node bin/groupswrite -s 192.168.1.100 -g 0/0/1 -d 01
 ```
 ![](http://i.giphy.com/26xBvwQEv3gKYdRp6.gif)
 
-### Read value from `0/0/1` through `192.168.0.100`
+### Read value from **0/0/1** through **192.168.0.100**
 ```
 Usage bin/groupsread.js -s <ip address> -g <group address>
 
@@ -65,8 +65,7 @@ const client = new KnxListener.BusListener();
 const die = () => {
   return client.disconnect().then(
     () => process.exit(),
-    () => process.exit(),
-  );
+    () => process.exit());
 };
 
 // 2. Establish tunneling with recovery time of 1s
@@ -98,14 +97,14 @@ process.on('SIGINT', die);
 ```
 
 ## TODO
-* Generate `JSDoc`
+* Generate JSDoc
 * Integration testing
-* Create another npm module for data types decoding
-* Create `REST API` with `express`
-* Create stream using websockets to broadcast telegrams to rich web apps
-* Create `ETS` project parser to get
+* Create another npm module for data types encoding/decoding
 
 ## What is next?
-* You may record telegrams to a database and `return last values` on demand
-* You may build visualization with any `KNX gateway`
-* You may delagate decoding of data to your `thick` clients (rich & mobile apps)
+* You may create stream using websockets to broadcast telegrams to rich web apps
+* You may create ETS project parser to get group address and store them in db
+* You may create REST API with express
+* You may record telegrams to a database and return last values on demand
+* You may build visualization with any KNX gateway
+* You may delegate decoding of data to your rich clients
