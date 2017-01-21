@@ -1,7 +1,7 @@
 import {
   createSocket,
   Socket,
-  AddressInfo,
+  RemoteInfo,
 } from 'dgram';
 import {
   EventEmitter,
@@ -20,7 +20,7 @@ export class AsyncSocket {
     return this.socket ? true : false;
   }
   connect(port: number = 0 /* OS assigned port */) {
-    return new Promise<AddressInfo>((resolve, reject) => {
+    return new Promise<RemoteInfo>((resolve, reject) => {
       if (this.isConnected()) {
         resolve(this.socket.address());
       } else {
@@ -30,7 +30,9 @@ export class AsyncSocket {
           })
           .once('close', () => {
             this.socket = undefined;
-            // remove all used listeners
+            // emit disconnect event
+            this.events.emit('disconnect');
+            // and remove all listeners to prevent any memory leak
             this.events.removeAllListeners();
           })
           .once('error', (err) => {
@@ -83,8 +85,9 @@ export class AsyncSocket {
       }
     });
   }
-  on(event: 'raw', cb: (raw: Buffer, sender: AddressInfo) => void): Subscriber;
-  on<T>(event: string, cb: (query: T, sender: AddressInfo) => void): Subscriber;
+  on(event: 'disconnect', cb: () => void): Subscriber;
+  on(event: 'raw', cb: (raw: Buffer, sender: RemoteInfo) => void): Subscriber;
+  on<T>(event: string, cb: (query: T, sender: RemoteInfo) => void): Subscriber;
   on(event: string, cb: (...args: any[]) => void): Subscriber {
     if (this.events.on(event, cb)) {
       return {

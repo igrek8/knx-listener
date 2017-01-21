@@ -27,10 +27,14 @@ import {
  * Manages io server queries and tracks resolution of mappable requests
  */
 export class QueryManager extends AsyncSocket {
-  constructor() {
-    super();
+  connect(port: number = 0 /* OS assigned port */): Promise<RemoteInfo> {
     // forward raw data for processing
-    super.on('raw', this.process.bind(this));
+    const ref = super.on('raw', this.process.bind(this));
+    return super.connect(port).catch((err) => {
+      ref.unsubscribe();
+      // propagate error to the caller
+      throw err;
+    });
   }
   /**
    * Creates a mapable request to track responses with timeout
@@ -54,7 +58,9 @@ export class QueryManager extends AsyncSocket {
       // set timeout if no response within given time
       setTimeout(() => {
         ref.unsubscribe(); // avoid memory leak
-        reject({ ...new Error(`Request timeout`), code: 'ETIMEOUT' });
+        const err: NodeJS.ErrnoException = new Error(`Request timeout`);
+        err.code = 'ETIMEOUT';
+        reject(err);
       }, timeout > 200 ? timeout : 200).unref(); // unref timeout to let node exit
       // make request and propagate errors
       return super.send(host, port, data).catch((err) => {

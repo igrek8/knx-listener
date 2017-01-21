@@ -109,6 +109,11 @@ export class BusListener {
             resolve(typeof cb === 'function' ? cb() : undefined);
           }
         }, 0);
+        const ref = this.qmanager.on('disconnect', () => {
+          // when disconnect scheduled
+          clearInterval(interval);
+          ref.unsubscribe();
+        });
         interval.unref(); // let node exit
       }
     });
