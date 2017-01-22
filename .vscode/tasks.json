@@ -2,6 +2,6 @@
   "version": "0.1.0",
   "command": "tsc",
   "isShellCommand": true,
-  "args": ["-p", "./tsconfig.dev.json"],
+  "args": ["-p", "./tsconfig.json"],
   "problemMatcher": "$tsc"
 }

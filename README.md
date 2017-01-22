@@ -1,11 +1,12 @@
 # KNX Listener
-A thin client to monitor, write and read telegrams through KNX gateway
+A thin node client to monitor, write and read groups telegrams through KNX gateway
 
 [![npm version](https://badge.fury.io/js/knx-listener.svg)](https://badge.fury.io/js/knx-listener) [![npm](https://img.shields.io/npm/l/express.svg)]()
 
 ## Install
+Install the knx-listener globally and use commands from the command line
 ```
-npm install --save knx-listener
+sudo npm install -g knx-listener
 ```
 ## Remote access to the knx net
 ### Monitor telegrams
@@ -19,11 +20,11 @@ Options:
   -h, --help     Show help                                             [boolean]
 ```
 ```
-node bin/busmonitor -s 192.168.0.100
+busmonitor -s 192.168.1.100
 ```
 ![](http://i.giphy.com/26xBuNRYG1nGUnj3O.gif)
 
-### Write value **1** to **0/0/1** through **192.168.0.100**
+### Write value **1** to **0/0/1** through **192.168.1.100**
 ```
 Usage bin/groupswrite.js -s <ip address> -g <group address> -d <XX:XX:..>
 
@@ -35,11 +36,11 @@ Options:
   -h, --help          Show help                                        [boolean]
 ```
 ```
-node bin/groupswrite -s 192.168.1.100 -g 0/0/1 -d 01
+groupswrite -s 192.168.1.100 -g 0/0/1 -d 01
 ```
 ![](http://i.giphy.com/26xBvwQEv3gKYdRp6.gif)
 
-### Read value from **0/0/1** through **192.168.0.100**
+### Read value from **0/0/1** through **192.168.1.100**
 ```
 Usage bin/groupsread.js -s <ip address> -g <group address>
 
@@ -50,7 +51,7 @@ Options:
   -h, --help          Show help                                        [boolean]
 ```
 ```
-node bin/groupsread -s 192.168.0.100 -g 0/0/1
+groupsread -s 192.168.1.100 -g 0/0/1
 ```
 ![](http://i.giphy.com/l3q2Yr9ZgyRYYQBva.gif)
 
@@ -107,4 +108,4 @@ process.on('SIGINT', die);
 * You may create REST API with express
 * You may record telegrams to a database and return last values on demand
 * You may build visualization with any KNX gateway
-* You may delegate decoding of data to your rich clients
+* You may delegate endcoding/decoding of data to your rich clients

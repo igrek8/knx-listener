@@ -1,7 +1,7 @@
 {
   "name": "knx-listener",
   "license": "MIT",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "description": "A thin client that creates a tunnel to knx gateway to listen to telegrams within knx net",
@@ -22,6 +22,8 @@
   "homepage": "https://github.com/crabicode/knx-listener",
   "readme": "README.md",
   "scripts": {
+    "compile:dist": "tsc -p tsconfig.dist.json",
+    "compile:dev": "tsc -p tsconfig.json",
     "start": "node bin/busmonitor.js",
     "busmonitor": "node bin/busmonitor.js",
     "groupswrite": "node bin/groupswrite.js",
@@ -57,5 +59,10 @@
     "modulePaths": [
       "<rootDir>"
     ]
+  },
+  "bin": {
+    "busmonitor": "./bin/busmonitor.js",
+    "groupsread": "./bin/groupsread.js",
+    "groupswrite": "./bin/groupswrite.js"
   }
 }

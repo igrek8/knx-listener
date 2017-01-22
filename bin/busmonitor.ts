@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import * as yargs from 'yargs';
 import * as chalk from 'chalk';
 import { BusListener } from '../dist/bus-listener';

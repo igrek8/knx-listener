@@ -2,6 +2,9 @@
 import { RemoteInfo } from 'dgram';
 import { EventEmitter } from 'events';
 import { Subscriber } from '../interfaces';
+/**
+ * Simple promisable udp socket
+ */
 export declare class AsyncSocket {
     private socket;
     protected events: EventEmitter;

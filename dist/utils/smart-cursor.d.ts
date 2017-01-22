@@ -1,3 +1,6 @@
+/**
+ * Class helper acts as iterrator to access buffer
+ */
 export declare class SmartCursor {
     private cursor;
     private memorizedCursor;

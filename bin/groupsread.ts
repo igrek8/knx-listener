@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 import * as chalk from 'chalk';
 import * as yargs from 'yargs';
 import { isIPv4, knxAddr2num, num2knxAddr, isKnxAddress } from '../dist/utils/index';
