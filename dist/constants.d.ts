@@ -33,5 +33,5 @@ export declare const enum BusEvent {
     GroupResponse = 64,
     GroupWrite = 128,
 }
-export declare const MyIp: any;
+export declare const MyIp: string;
 export declare const MyIpNumber: number;

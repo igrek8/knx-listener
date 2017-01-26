@@ -24,14 +24,15 @@ export function mac2num(macString: string) {
 }
 
 export function getCurrentIp() {
-  let address;
   const ifaces = networkInterfaces();
   for (const dev in ifaces) {
-    ifaces[dev].filter((details) =>
-      details.family === 'IPv4' && details.internal === false ?
-        address = details.address : undefined);
+    for (const details of ifaces[dev]) {
+      if (details.family === 'IPv4' && details.internal === false) {
+        return details.address;
+      }
+    }
   }
-  return address;
+  throw new Error('Failed to get current ip');
 }
 
 export function sizeOf(value: number) {

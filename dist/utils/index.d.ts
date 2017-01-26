@@ -2,7 +2,7 @@ export declare function ip2num(ipString: string): number;
 export declare function num2ip(ipNumber: number): string;
 export declare function num2mac(macNumber: number): string;
 export declare function mac2num(macString: string): number;
-export declare function getCurrentIp(): any;
+export declare function getCurrentIp(): string;
 export declare function sizeOf(value: number): number;
 export declare function knxAddr2num(addrStr: string): number;
 export declare function num2knxAddr(addrNum: number, isGroupAddr?: boolean): string;
