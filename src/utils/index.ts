@@ -40,7 +40,7 @@ export function sizeOf(value: number) {
 }
 
 export function knxAddr2num(addrStr: string) {
-  const m = isKnxAddress(addrStr);
+  const m = addrStr.split(/[\.\/]/);
   if (m && m.length > 0) {
     return (((+m[0]) & 0x01f) << 11) + (((+m[1]) & 0x07) << 8) + ((+m[2]) & 0xff);
   }
@@ -58,13 +58,20 @@ export function removeNonPrintable(str: string) {
   return str.replace(/[^\x20-\x7E]+/g, '');
 }
 
-export function noop(..._: any[]) { }
+export function noop(..._: any[]): any { }
 
 export function isIPv4(ipStr: string) {
   return /(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/
     .test(ipStr);
 }
 
-export function isKnxAddress(knxStrAddr: string) {
-  return knxStrAddr.split(/[\.\/]/);
+export function isKnxAddress(knxStrAddr: string, isGroupAddress = true) {
+  if (isGroupAddress) {
+    // group address 1/1/1
+    return /^(3[01]|([0-2]?[0-9]))\/(([0-7]\/(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))|(([01]?\d{1,3})|(20[0-4][0-7])))$/
+      .test(knxStrAddr);
+  } else {
+    // individual address 1.1.15
+    return /^([01]?\d)\.([01]?\d)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9]?[0-9])?$/.test(knxStrAddr);
+  }
 }

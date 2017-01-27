@@ -61,7 +61,7 @@ export class QueryManager extends AsyncSocket {
         const err: NodeJS.ErrnoException = new Error(`Request timeout`);
         err.code = 'ETIMEOUT';
         reject(err);
-      }, timeout > 200 ? timeout : 200).unref(); // unref timeout to let node exit
+      }, timeout > 300 ? timeout : 300).unref(); // unref timeout to let node exit
       // make request and propagate errors
       return super.send(host, port, data).catch((err) => {
         ref.unsubscribe(); // avoid memory leak

@@ -7,6 +7,6 @@ export declare function sizeOf(value: number): number;
 export declare function knxAddr2num(addrStr: string): number;
 export declare function num2knxAddr(addrNum: number, isGroupAddr?: boolean): string;
 export declare function removeNonPrintable(str: string): string;
-export declare function noop(..._: any[]): void;
+export declare function noop(..._: any[]): any;
 export declare function isIPv4(ipStr: string): boolean;
-export declare function isKnxAddress(knxStrAddr: string): string[];
+export declare function isKnxAddress(knxStrAddr: string, isGroupAddress?: boolean): boolean;

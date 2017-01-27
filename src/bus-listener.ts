@@ -102,19 +102,21 @@ export class BusListener {
       if (this.isConnected()) {
         resolve(typeof cb === 'function' ? cb() : undefined);
       } else {
+        let ref: Subscriber;
         const interval = setInterval(() => {
           if (this.isConnected()) {
             // when connected, clear interval
             clearInterval(interval);
+            ref.unsubscribe();
             resolve(typeof cb === 'function' ? cb() : undefined);
           }
         }, 0);
-        const ref = this.qmanager.on('disconnect', () => {
+        interval.unref(); // let node exit
+        ref = this.qmanager.on('disconnect', () => {
           // when disconnect scheduled
           clearInterval(interval);
           ref.unsubscribe();
         });
-        interval.unref(); // let node exit
       }
     });
   }
@@ -124,7 +126,7 @@ export class BusListener {
   protected nextSeqn() {
     let id = 0;
     while (this.sequenceIds.has(id)) {
-      if (id++ >= 0xFF) {
+      if (id++ > 0xFF) {
         throw new Error('Maximum sequence number reached');
       }
     }
