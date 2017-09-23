@@ -100,6 +100,7 @@ export class QueryManager extends AsyncSocket {
           this.send(remote.address, remote.port, ack(
             seqn.seqn, seqn.channelId, Status.NoError,
           ));
+          this.events.emit('cemi', raw.slice(10), remote);
           return this.events.emit('query', { ...cemi, ...seqn }, remote);
         }
         case Service.DisconnectResponse: {
