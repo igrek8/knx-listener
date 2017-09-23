@@ -143,6 +143,28 @@ export class BusListener {
       sender.family === 'IPv4';
   }
   /**
+   * Sends cemi to the bus
+   */
+  public sendCemi(data: Buffer) {
+    const seqn = this.nextSeqn();
+    const req = cemi({
+      cemi: data,
+      seqn,
+      channelId: this.channelId,
+    });
+    return this.qmanager.request<TunnelingAck>(this.remoteHost, this.remotePort, req, (res, sender) => {
+      return res.seqn === seqn && this.isSameOrigin(res, sender);
+    }).then((res) => {
+      // always free used sequence number
+      this.sequenceIds.delete(seqn);
+      return res;
+    }, (err) => {
+      // always free used sequence number
+      this.sequenceIds.delete(seqn);
+      throw err;
+    });
+  }
+  /**
    * Sends data to the bus
    */
   public write(data: Buffer | Uint8Array | number[], groupAddress: number) {
