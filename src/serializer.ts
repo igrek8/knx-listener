@@ -110,6 +110,17 @@ export function openTunnel({ receiveAt, respondTo }: {
     tunneling(),
   ]);
 };
+                   
+export function cemi({ cemi, seqn, channelId }: {
+  cemi: Buffer;
+  seqn: number;
+  channelId: number;
+}) {
+  return message(Service.TunnelingRequest, [
+    seqnum(seqn, channelId),
+    cemi,
+  ]);
+};
 
 export function write({ data, seqn, channelId, source, dest }: {
   data: Buffer | Uint8Array | number[];
